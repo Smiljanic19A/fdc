@@ -393,6 +393,30 @@ export default {
       const touch = event.touches[0];
       this.touchStartX = touch.clientX;
       this.touchStartY = touch.clientY;
+      
+      // Calculate initial swipe direction
+      const deltaX = touch.clientX - this.touchStartX;
+      const deltaY = touch.clientY - this.touchStartY;
+      
+      // Minimum swipe distance threshold
+      const minSwipeDistance = 30;
+      
+      // Determine initial movement direction
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal movement
+        if (deltaX > 0) {
+          this.keys.right = true;
+          this.playerDirection = 1;
+        } else {
+          this.keys.left = true;
+          this.playerDirection = -1;
+        }
+      } else if (deltaY < -minSwipeDistance && !this.isJumping) {
+        // Vertical movement (jump)
+        this.keys.up = true;
+        this.playerVelocityY = 15;
+        this.isJumping = true;
+      }
     },
     handleTouchMove(event) {
       event.preventDefault(); // Prevent scrolling while playing
@@ -403,19 +427,20 @@ export default {
       // Minimum swipe distance threshold
       const minSwipeDistance = 30;
       
-      // Horizontal swipe
-      if (Math.abs(deltaX) > minSwipeDistance) {
+      // Update movement based on current touch position
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal movement
         if (deltaX > 0) {
           this.keys.right = true;
+          this.keys.left = false;
           this.playerDirection = 1;
         } else {
           this.keys.left = true;
+          this.keys.right = false;
           this.playerDirection = -1;
         }
-      }
-      
-      // Vertical swipe (up)
-      if (deltaY < -minSwipeDistance && !this.isJumping) {
+      } else if (deltaY < -minSwipeDistance && !this.isJumping) {
+        // Vertical movement (jump)
         this.keys.up = true;
         this.playerVelocityY = 15;
         this.isJumping = true;
@@ -423,7 +448,7 @@ export default {
     },
     handleTouchEnd(event) {
       event.preventDefault(); // Prevent scrolling while playing
-      // Reset all keys
+      // Reset all movement keys
       this.keys.left = false;
       this.keys.right = false;
       this.keys.up = false;
