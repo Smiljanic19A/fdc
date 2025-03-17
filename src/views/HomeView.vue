@@ -38,6 +38,11 @@
       </div>
     </section>
 
+    <!-- FBGM Button -->
+    <div class="fbgm-container">
+      <button class="fbgm-btn" @click="showFbgmModal = true">FBGM</button>
+    </div>
+
     <!-- Tokenomics Preview -->
     <section class="tokenomics-preview">
       <h2>Tokenomics at a Glance</h2>
@@ -94,12 +99,379 @@
         <a href="#" class="social-btn telegram">Telegram</a>
       </div>
     </section>
+
+    <!-- FBGM Modal -->
+    <div v-if="showFbgmModal" class="modal-overlay" @click="showFbgmModal = false">
+      <div class="modal-content" @click.stop>
+        <button class="close-btn" @click="showFbgmModal = false">×</button>
+        <div class="modal-body game-container">
+          <div class="game-world">
+            <div class="score-container">
+              <div class="score">Score: {{ score }}</div>
+              <div class="high-score">High Score: {{ highScore || 'Set your high score!' }}</div>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div v-if="gameOver" class="game-over">
+              <h2>GAME OVER</h2>
+              <p>Final Score: {{ score }}</p>
+              <p class="high-score-text" v-if="isNewHighScore">New High Score! 🏆</p>
+              <button class="retry-btn" @click="startGame">Play Again</button>
+            </div>
+
+            <div 
+              v-if="!gameOver"
+              class="player" 
+              :style="{ 
+                left: playerX + 'px', 
+                bottom: playerY + 'px',
+                transform: `scaleX(${playerDirection})`
+              }"
+            >
+              <img src="/lex.png" alt="Player" class="player-sprite">
+            </div>
+
+            <div 
+              v-for="(dollar, index) in dollars" 
+              :key="'dollar-'+index" 
+              class="dollar-sign"
+              :style="{
+                left: dollar.x + 'px',
+                bottom: dollar.y + 'px'
+              }"
+            >
+              💵
+            </div>
+
+            <div 
+              v-for="(lady, index) in ladies" 
+              :key="'lady-'+index" 
+              class="lady-bonus"
+              :style="{
+                left: lady.x + 'px',
+                bottom: lady.y + 'px'
+              }"
+            >
+              <svg width="30" height="30" viewBox="0 0 100 100">
+                <path d="M50 10 C20 10 20 50 50 80 C80 50 80 10 50 10" fill="#ff69b4"/>
+                <circle cx="50" cy="35" r="15" fill="#fff"/>
+              </svg>
+            </div>
+
+            <div 
+              v-for="(skull, index) in skulls" 
+              :key="'skull-'+index" 
+              class="skull-danger"
+              :style="{
+                left: skull.x + 'px',
+                bottom: skull.y + 'px'
+              }"
+            >
+              ☠️
+            </div>
+
+            <div class="ground"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  data() {
+    return {
+      showFbgmModal: false,
+      playerX: 50,
+      playerY: 0,
+      playerVelocityY: 0,
+      playerDirection: 1,
+      isJumping: false,
+      gameLoop: null,
+      score: 0,
+      highScore: 0,
+      isNewHighScore: false,
+      gameOver: false,
+      dollars: [],
+      ladies: [],
+      skulls: [],
+      dollarSpawnTimer: null,
+      ladySpawnTimer: null,
+      skullSpawnTimer: null,
+      keys: {
+        left: false,
+        right: false,
+        up: false
+      }
+    }
+  },
+  mounted() {
+    // Load high score when component is mounted
+    this.loadHighScore();
+  },
+  methods: {
+    loadHighScore() {
+      const savedHighScore = localStorage.getItem('fbgmHighScore');
+      if (savedHighScore) {
+        this.highScore = parseInt(savedHighScore);
+      }
+    },
+    saveHighScore() {
+      if (this.score > this.highScore) {
+        this.highScore = this.score;
+        localStorage.setItem('fbgmHighScore', this.score.toString());
+        this.isNewHighScore = true;
+      }
+    },
+    startGame() {
+      this.gameOver = false;
+      this.isNewHighScore = false;
+      this.setupEventListeners();
+      this.gameLoop = requestAnimationFrame(this.updateGame);
+      this.startDollarSpawning();
+      this.startLadySpawning();
+      this.startSkullSpawning();
+      this.score = 0;
+      this.dollars = [];
+      this.ladies = [];
+      this.skulls = [];
+      this.playerX = 50;
+      this.playerY = 0;
+    },
+    stopGame() {
+      if (this.gameLoop) {
+        cancelAnimationFrame(this.gameLoop);
+      }
+      if (this.dollarSpawnTimer) {
+        clearInterval(this.dollarSpawnTimer);
+      }
+      if (this.ladySpawnTimer) {
+        clearInterval(this.ladySpawnTimer);
+      }
+      if (this.skullSpawnTimer) {
+        clearInterval(this.skullSpawnTimer);
+      }
+      this.removeEventListeners();
+      this.resetGame();
+    },
+    resetGame() {
+      this.playerX = 50;
+      this.playerY = 0;
+      this.playerVelocityY = 0;
+      this.isJumping = false;
+      this.dollars = [];
+      this.ladies = [];
+      this.skulls = [];
+      this.score = 0;
+      this.gameOver = false;
+    },
+    startDollarSpawning() {
+      this.dollarSpawnTimer = setInterval(() => {
+        this.spawnDollar();
+      }, 2000); // Spawn a new dollar every 2 seconds
+    },
+    startLadySpawning() {
+      this.ladySpawnTimer = setInterval(() => {
+        this.spawnLady();
+      }, 3000); // Spawn a new lady bonus every 3 seconds
+    },
+    startSkullSpawning() {
+      this.skullSpawnTimer = setInterval(() => {
+        this.spawnSkull();
+      }, 4000); // Spawn a new skull every 4 seconds
+    },
+    spawnDollar() {
+      const worldWidth = 800;
+      const worldHeight = 500;
+      this.dollars.push({
+        x: Math.random() * (worldWidth - 30),
+        y: worldHeight,
+        velocity: -(2 + Math.random() * 2)
+      });
+    },
+    spawnLady() {
+      const worldWidth = 800;
+      const worldHeight = 500;
+      this.ladies.push({
+        x: Math.random() * (worldWidth - 30),
+        y: worldHeight,
+        velocity: -(1.5 + Math.random() * 1.5)
+      });
+    },
+    spawnSkull() {
+      const worldWidth = 800;
+      const worldHeight = 500;
+      this.skulls.push({
+        x: Math.random() * (worldWidth - 30),
+        y: worldHeight,
+        velocity: -(3 + Math.random() * 2) // Faster than other items
+      });
+    },
+    checkCollision(item) {
+      const playerWidth = 60;
+      const playerHeight = 60;
+      const itemWidth = 30;
+      const itemHeight = 30;
+
+      return (
+        this.playerX < item.x + itemWidth &&
+        this.playerX + playerWidth > item.x &&
+        this.playerY < item.y + itemHeight &&
+        this.playerY + playerHeight > item.y
+      );
+    },
+    setupEventListeners() {
+      window.addEventListener('keydown', this.handleKeyDown);
+      window.addEventListener('keyup', this.handleKeyUp);
+    },
+    removeEventListeners() {
+      window.removeEventListener('keydown', this.handleKeyDown);
+      window.removeEventListener('keyup', this.handleKeyUp);
+    },
+    handleKeyDown(event) {
+      switch(event.key.toLowerCase()) {
+        case 'arrowleft':
+        case 'a':
+          this.keys.left = true;
+          this.playerDirection = -1;
+          break;
+        case 'arrowright':
+        case 'd':
+          this.keys.right = true;
+          this.playerDirection = 1;
+          break;
+        case 'arrowup':
+        case 'w':
+        case ' ':
+          if (!this.isJumping) {
+            this.keys.up = true;
+            this.playerVelocityY = 15;
+            this.isJumping = true;
+          }
+          break;
+      }
+    },
+    handleKeyUp(event) {
+      switch(event.key.toLowerCase()) {
+        case 'arrowleft':
+        case 'a':
+          this.keys.left = false;
+          break;
+        case 'arrowright':
+        case 'd':
+          this.keys.right = false;
+          break;
+        case 'arrowup':
+        case 'w':
+        case ' ':
+          this.keys.up = false;
+          break;
+      }
+    },
+    handleGameOver() {
+      this.gameOver = true;
+      this.saveHighScore();
+      if (this.gameLoop) {
+        cancelAnimationFrame(this.gameLoop);
+      }
+      if (this.dollarSpawnTimer) {
+        clearInterval(this.dollarSpawnTimer);
+      }
+      if (this.ladySpawnTimer) {
+        clearInterval(this.ladySpawnTimer);
+      }
+      if (this.skullSpawnTimer) {
+        clearInterval(this.skullSpawnTimer);
+      }
+    },
+    updateGame() {
+      if (this.gameOver) return;
+
+      // Movement speed
+      const speed = 7;
+      
+      // Horizontal movement
+      if (this.keys.left && this.playerX > 0) {
+        this.playerX -= speed;
+      }
+      if (this.keys.right && this.playerX < 740) {
+        this.playerX += speed;
+      }
+      
+      // Gravity and jumping
+      this.playerVelocityY -= 0.8;
+      this.playerY += this.playerVelocityY;
+      
+      // Ground collision
+      if (this.playerY <= 0) {
+        this.playerY = 0;
+        this.playerVelocityY = 0;
+        this.isJumping = false;
+      }
+
+      // Update dollars
+      for (let i = this.dollars.length - 1; i >= 0; i--) {
+        const dollar = this.dollars[i];
+        dollar.y += dollar.velocity;
+
+        if (this.checkCollision(dollar)) {
+          this.score++;
+          this.dollars.splice(i, 1);
+          continue;
+        }
+
+        if (dollar.y < -30) {
+          this.dollars.splice(i, 1);
+        }
+      }
+
+      // Update ladies
+      for (let i = this.ladies.length - 1; i >= 0; i--) {
+        const lady = this.ladies[i];
+        lady.y += lady.velocity;
+
+        if (this.checkCollision(lady)) {
+          this.score += 2; // Double points for lady bonus
+          this.ladies.splice(i, 1);
+          continue;
+        }
+
+        if (lady.y < -30) {
+          this.ladies.splice(i, 1);
+        }
+      }
+
+      // Update skulls
+      for (let i = this.skulls.length - 1; i >= 0; i--) {
+        const skull = this.skulls[i];
+        skull.y += skull.velocity;
+
+        if (this.checkCollision(skull)) {
+          this.handleGameOver();
+          return;
+        }
+
+        if (skull.y < -30) {
+          this.skulls.splice(i, 1);
+        }
+      }
+      
+      this.gameLoop = requestAnimationFrame(this.updateGame);
+    }
+  },
+  watch: {
+    showFbgmModal(newVal) {
+      if (newVal) {
+        this.$nextTick(() => {
+          this.startGame();
+        });
+      } else {
+        this.stopGame();
+      }
+    }
+  }
 }
 </script>
 
@@ -469,5 +841,293 @@ export default {
     width: 100%;
     max-width: 300px;
   }
+}
+
+/* FBGM Button */
+.fbgm-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.fbgm-btn {
+  padding: 1rem 2rem;
+  background-color: #a627a8;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+
+.fbgm-btn:hover {
+  background-color: #f0c225;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(166, 39, 168, 0.4);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+  height: 50VH;
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+  z-index: 1002;
+}
+
+.modal-body {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 100%;
+    height: calc(100vh - 60px); /* Assuming nav height is 60px */
+    border-radius: 0;
+  }
+}
+
+/* Game Styles */
+.game-container {
+  padding: 0;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.game-world {
+  width: 800px;
+  height: 500px;
+  position: relative;
+  margin: 0 auto;
+  background-color: #111;
+  border: 2px solid #a627a8;
+}
+
+.score-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.score {
+  color: #f0c225;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 5px;
+}
+
+.high-score {
+  color: #9bf6fd;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.high-score-text {
+  color: #f0c225;
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  text-shadow: 0 0 10px rgba(240, 194, 37, 0.5);
+  animation: pulse-highlight 1s ease-in-out infinite;
+}
+
+@keyframes pulse-highlight {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.dollar-sign {
+  position: absolute;
+  font-size: 24px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.player {
+  position: absolute;
+  width: 90;
+  height: 90px;
+  transition: transform 0.1s;
+}
+
+.player-sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #a627a8;
+}
+
+/* Update Modal Styles */
+.modal-content {
+  width: 900px;
+  height: 600px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 100%;
+    height: calc(100vh - 60px);
+    max-width: 100%;
+    max-height: none;
+  }
+  
+  .game-world {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.lady-bonus {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.lady-bonus svg {
+  filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.7));
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.skull-danger {
+  position: absolute;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-danger 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.7));
+}
+
+@keyframes pulse-danger {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 2px solid #ff0000;
+  z-index: 1000;
+}
+
+.game-over h2 {
+  color: #ff0000;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.game-over p {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.retry-btn {
+  background-color: #a627a8;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.retry-btn:hover {
+  background-color: #f0c225;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(166, 39, 168, 0.4);
 }
 </style>
