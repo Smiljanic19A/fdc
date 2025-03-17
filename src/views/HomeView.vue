@@ -74,22 +74,17 @@
         <div class="step">
           <div class="step-number">1</div>
           <h3>Create Wallet</h3>
-          <p>Download and set up MetaMask or Trust Wallet</p>
+          <p>Download and set up Phantom</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
           <h3>Buy BNB/ETH</h3>
-          <p>Purchase BNB or ETH from an exchange</p>
+          <p>Purchase SOL from an exchange</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Connect to DEX</h3>
-          <p>Connect your wallet to PancakeSwap or Uniswap</p>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
           <h3>Swap for FDC</h3>
-          <p>Swap your BNB/ETH for Full Degen Coin</p>
+          <p>Swap your SOL for Full Degen Coin</p>
         </div>
       </div>
       <a href="#" class="primary-btn">Buy Now</a>
@@ -102,7 +97,6 @@
       <div class="social-buttons">
         <a href="#" class="social-btn twitter">Twitter</a>
         <a href="#" class="social-btn telegram">Telegram</a>
-        <a href="#" class="social-btn discord">Discord</a>
       </div>
     </section>
   </div>
