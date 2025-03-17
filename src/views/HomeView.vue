@@ -204,7 +204,9 @@ export default {
         left: false,
         right: false,
         up: false
-      }
+      },
+      touchStartX: 0,
+      touchStartY: 0
     }
   },
   mounted() {
@@ -325,10 +327,26 @@ export default {
     setupEventListeners() {
       window.addEventListener('keydown', this.handleKeyDown);
       window.addEventListener('keyup', this.handleKeyUp);
+      
+      // Add touch event listeners
+      const gameWorld = document.querySelector('.game-world');
+      if (gameWorld) {
+        gameWorld.addEventListener('touchstart', this.handleTouchStart);
+        gameWorld.addEventListener('touchmove', this.handleTouchMove);
+        gameWorld.addEventListener('touchend', this.handleTouchEnd);
+      }
     },
     removeEventListeners() {
       window.removeEventListener('keydown', this.handleKeyDown);
       window.removeEventListener('keyup', this.handleKeyUp);
+      
+      // Remove touch event listeners
+      const gameWorld = document.querySelector('.game-world');
+      if (gameWorld) {
+        gameWorld.removeEventListener('touchstart', this.handleTouchStart);
+        gameWorld.removeEventListener('touchmove', this.handleTouchMove);
+        gameWorld.removeEventListener('touchend', this.handleTouchEnd);
+      }
     },
     handleKeyDown(event) {
       switch(event.key.toLowerCase()) {
@@ -369,6 +387,46 @@ export default {
           this.keys.up = false;
           break;
       }
+    },
+    handleTouchStart(event) {
+      event.preventDefault(); // Prevent scrolling while playing
+      const touch = event.touches[0];
+      this.touchStartX = touch.clientX;
+      this.touchStartY = touch.clientY;
+    },
+    handleTouchMove(event) {
+      event.preventDefault(); // Prevent scrolling while playing
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - this.touchStartX;
+      const deltaY = touch.clientY - this.touchStartY;
+      
+      // Minimum swipe distance threshold
+      const minSwipeDistance = 30;
+      
+      // Horizontal swipe
+      if (Math.abs(deltaX) > minSwipeDistance) {
+        if (deltaX > 0) {
+          this.keys.right = true;
+          this.playerDirection = 1;
+        } else {
+          this.keys.left = true;
+          this.playerDirection = -1;
+        }
+      }
+      
+      // Vertical swipe (up)
+      if (deltaY < -minSwipeDistance && !this.isJumping) {
+        this.keys.up = true;
+        this.playerVelocityY = 15;
+        this.isJumping = true;
+      }
+    },
+    handleTouchEnd(event) {
+      event.preventDefault(); // Prevent scrolling while playing
+      // Reset all keys
+      this.keys.left = false;
+      this.keys.right = false;
+      this.keys.up = false;
     },
     handleGameOver() {
       this.gameOver = true;
