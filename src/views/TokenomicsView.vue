@@ -266,7 +266,7 @@ export default {
 .tokenomics-hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -283,7 +283,7 @@ export default {
 }
 
 .alt-bg {
-  background-color: rgba(247, 147, 26, 0.05);
+  background-color: rgba(166, 39, 168, 0.05);
   border-radius: 10px;
   margin: 2rem 0;
 }
@@ -306,7 +306,7 @@ export default {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   border-radius: 2px;
 }
 
@@ -350,17 +350,17 @@ export default {
 }
 
 .segment-1 {
-  background-color: #f7931a;
+  background-color: #a627a8;
   clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
 }
 
 .segment-2 {
-  background-color: #ff6b6b;
+  background-color: #f0c225;
   clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
 }
 
 .segment-3 {
-  background-color: #4cd964;
+  background-color: #9bf6fd;
   clip-path: polygon(50% 50%, 50% 100%, 0% 100%, 0% 75%);
 }
 
@@ -397,9 +397,9 @@ export default {
   margin-right: 1rem;
 }
 
-.ci-1 { background-color: #f7931a; }
-.ci-2 { background-color: #ff6b6b; }
-.ci-3 { background-color: #4cd964; }
+.ci-1 { background-color: #a627a8; }
+.ci-2 { background-color: #f0c225; }
+.ci-3 { background-color: #9bf6fd; }
 .ci-4 { background-color: #5ac8fa; }
 .ci-5 { background-color: #007aff; }
 .ci-6 { background-color: #5856d6; }
@@ -443,7 +443,7 @@ export default {
 .tax-percentage {
   font-size: 3rem;
   font-weight: 700;
-  color: #f7931a;
+  color: #f0c225;
   margin-bottom: 1rem;
 }
 
@@ -487,7 +487,7 @@ export default {
 .utility-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #f7931a;
+  color: #f0c225;
 }
 
 /* Deflationary Mechanism */
@@ -519,7 +519,7 @@ export default {
 }
 
 .highlight {
-  color: #f7931a;
+  color: #f0c225;
   font-weight: 600;
 }
 
@@ -533,7 +533,7 @@ export default {
   position: relative;
   width: 150px;
   height: 150px;
-  background-color: rgba(247, 147, 26, 0.1);
+  background-color: rgba(166, 39, 168, 0.1);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -578,7 +578,7 @@ export default {
 .detail-item h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: #f7931a;
+  color: #f0c225;
 }
 
 .contract-address {
@@ -589,7 +589,7 @@ export default {
 .contract-address h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #f7931a;
+  color: #f0c225;
 }
 
 .address-box {
@@ -610,8 +610,8 @@ export default {
 }
 
 .copy-btn {
-  background-color: #f7931a;
-  color: #000000;
+  background-color: #a627a8;
+  color: #ffffff;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -621,7 +621,7 @@ export default {
 }
 
 .copy-btn:hover {
-  background-color: #ffffff;
+  background-color: #f0c225;
   transform: translateY(-2px);
 }
 
@@ -640,7 +640,7 @@ export default {
   transform: translateX(-50%);
   width: 4px;
   height: 100%;
-  background: linear-gradient(to bottom, #f7931a, #ff6b6b);
+  background: linear-gradient(to bottom, #a627a8, #9bf6fd);
   border-radius: 2px;
 }
 
@@ -655,7 +655,7 @@ export default {
 .timeline-point {
   width: 20px;
   height: 20px;
-  background-color: #f7931a;
+  background-color: #a627a8;
   border-radius: 50%;
   position: absolute;
   left: 50%;
@@ -685,7 +685,7 @@ export default {
 .timeline-content h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: #f7931a;
+  color: #f0c225;
 }
 
 /* FAQ Section */
@@ -704,7 +704,7 @@ export default {
 .faq-item h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: #f7931a;
+  color: #f0c225;
 }
 
 .faq-item p {

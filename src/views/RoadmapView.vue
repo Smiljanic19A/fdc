@@ -249,7 +249,7 @@ export default {
 .roadmap-hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -286,7 +286,7 @@ export default {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   border-radius: 2px;
 }
 
@@ -315,7 +315,7 @@ export default {
   bottom: 0;
   left: 50%;
   width: 4px;
-  background: linear-gradient(to bottom, #f7931a, #ff6b6b);
+  background: linear-gradient(to bottom, #a627a8, #9bf6fd);
   transform: translateX(-50%);
   border-radius: 2px;
 }
@@ -373,31 +373,31 @@ export default {
   left: 50%;
   width: 20px;
   height: 20px;
-  background-color: #f7931a;
+  background-color: #a627a8;
   border-radius: 50%;
   transform: translateX(-50%);
   z-index: 1;
 }
 
 .timeline-item.completed:after {
-  background-color: #4cd964;
+  background-color: #9bf6fd;
 }
 
 .timeline-item.active:after {
-  background-color: #f7931a;
-  box-shadow: 0 0 0 5px rgba(247, 147, 26, 0.3);
+  background-color: #f0c225;
+  box-shadow: 0 0 0 5px rgba(240, 194, 37, 0.3);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(247, 147, 26, 0.7);
+    box-shadow: 0 0 0 0 rgba(240, 194, 37, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(247, 147, 26, 0);
+    box-shadow: 0 0 0 10px rgba(240, 194, 37, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(247, 147, 26, 0);
+    box-shadow: 0 0 0 0 rgba(240, 194, 37, 0);
   }
 }
 
@@ -408,8 +408,8 @@ export default {
 
 .phase-badge {
   display: inline-block;
-  background-color: #f7931a;
-  color: #000000;
+  background-color: #a627a8;
+  color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   font-weight: 700;
@@ -460,12 +460,12 @@ export default {
 }
 
 .completed .milestone-check {
-  background-color: #4cd964;
+  background-color: #9bf6fd;
   color: #000000;
 }
 
 .in-progress .milestone-check {
-  background-color: #f7931a;
+  background-color: #f0c225;
   color: #000000;
   animation: spin 2s linear infinite;
 }
@@ -487,7 +487,7 @@ export default {
 /* Community Driven Section */
 .community-driven {
   padding: 4rem 0;
-  background-color: rgba(247, 147, 26, 0.05);
+  background-color: rgba(166, 39, 168, 0.05);
   border-radius: 10px;
   margin: 2rem 0;
   text-align: center;
@@ -513,7 +513,7 @@ export default {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   border-radius: 2px;
 }
 
@@ -533,8 +533,8 @@ export default {
 
 .community-btn {
   display: inline-block;
-  background-color: #f7931a;
-  color: #000000;
+  background-color: #a627a8;
+  color: #ffffff;
   padding: 0.8rem 1.5rem;
   border-radius: 5px;
   font-weight: 700;
@@ -543,9 +543,9 @@ export default {
 }
 
 .community-btn:hover {
-  background-color: #ffffff;
+  background-color: #f0c225;
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(247, 147, 26, 0.4);
+  box-shadow: 0 5px 15px rgba(166, 39, 168, 0.4);
 }
 
 /* Updates Section */
@@ -569,7 +569,7 @@ export default {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  background: linear-gradient(90deg, #a627a8, #9bf6fd);
   border-radius: 2px;
 }
 
@@ -603,7 +603,7 @@ export default {
 
 .update-date {
   font-size: 0.9rem;
-  color: #f7931a;
+  color: #f0c225;
   margin-bottom: 1rem;
 }
 
