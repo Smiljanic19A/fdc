@@ -7,7 +7,7 @@
         <p class="tagline">The Ultimate Cryptocurrency for True Degens</p>
         <div class="cta-buttons">
           <a href="#" class="primary-btn">Buy Now</a>
-          <a href="#" class="secondary-btn">View Whitepaper</a>
+          <!--a href="#" class="secondary-btn">View Whitepaper</a> -->
         </div>
       </div>
       <div class="hero-image">
@@ -26,19 +26,14 @@
           <p>Designed for explosive growth with our innovative tokenomics model.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>Secure & Reliable</h3>
-          <p>Built on a secure blockchain with audited smart contracts.</p>
+          <div class="feature-icon">👥</div>
+          <h3>Built for the trenches</h3>
+          <p>Built for the trenches by the trenches - we will defend this shit</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💰</div>
-          <h3>Passive Income</h3>
-          <p>Earn rewards just by holding with our reflection mechanism.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👥</div>
-          <h3>Strong Community</h3>
-          <p>Join thousands of degens in our rapidly growing community.</p>
+          <h3>GM</h3>
+          <p>Get money just by HODL-ing with our reward mechanisms</p>
         </div>
       </div>
     </section>
