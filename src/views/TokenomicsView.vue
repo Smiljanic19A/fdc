@@ -1,0 +1,767 @@
+<template>
+  <div class="tokenomics">
+    <section class="tokenomics-hero">
+      <h1>Tokenomics</h1>
+      <p class="subtitle">Understanding the Economics of Full Degen Coin</p>
+    </section>
+
+    <section class="tokenomics-section">
+      <h2>Token Distribution</h2>
+      <div class="distribution-container">
+        <div class="distribution-chart">
+          <!-- Placeholder for chart - in a real app, you'd use a chart library like Chart.js -->
+          <div class="chart-placeholder">
+            <div class="segment segment-1" title="Public Sale: 40%"></div>
+            <div class="segment segment-2" title="Liquidity: 30%"></div>
+            <div class="segment segment-3" title="Team: 10%"></div>
+            <div class="segment segment-4" title="Marketing: 10%"></div>
+            <div class="segment segment-5" title="Development: 5%"></div>
+            <div class="segment segment-6" title="Community Rewards: 5%"></div>
+          </div>
+        </div>
+        <div class="distribution-details">
+          <div class="distribution-item">
+            <div class="color-indicator ci-1"></div>
+            <div class="distribution-text">
+              <h3>Public Sale: 40%</h3>
+              <p>400,000,000 FDC tokens available for public purchase</p>
+            </div>
+          </div>
+          <div class="distribution-item">
+            <div class="color-indicator ci-2"></div>
+            <div class="distribution-text">
+              <h3>Liquidity: 30%</h3>
+              <p>300,000,000 FDC tokens locked for liquidity provision</p>
+            </div>
+          </div>
+          <div class="distribution-item">
+            <div class="color-indicator ci-3"></div>
+            <div class="distribution-text">
+              <h3>Team: 10%</h3>
+              <p>100,000,000 FDC tokens allocated to the team (vested over 2 years)</p>
+            </div>
+          </div>
+          <div class="distribution-item">
+            <div class="color-indicator ci-4"></div>
+            <div class="distribution-text">
+              <h3>Marketing: 10%</h3>
+              <p>100,000,000 FDC tokens for marketing initiatives</p>
+            </div>
+          </div>
+          <div class="distribution-item">
+            <div class="color-indicator ci-5"></div>
+            <div class="distribution-text">
+              <h3>Development: 5%</h3>
+              <p>50,000,000 FDC tokens for ongoing development</p>
+            </div>
+          </div>
+          <div class="distribution-item">
+            <div class="color-indicator ci-6"></div>
+            <div class="distribution-text">
+              <h3>Community Rewards: 5%</h3>
+              <p>50,000,000 FDC tokens for community incentives and rewards</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section alt-bg">
+      <h2>Transaction Taxes</h2>
+      <p class="section-intro">Full Degen Coin implements a strategic tax system on each transaction to support the ecosystem's growth and reward holders.</p>
+      
+      <div class="tax-cards">
+        <div class="tax-card">
+          <div class="tax-percentage">5%</div>
+          <h3>Reflection to Holders</h3>
+          <p>5% of every transaction is redistributed to all FDC holders proportional to their holdings, rewarding long-term investors.</p>
+        </div>
+        <div class="tax-card">
+          <div class="tax-percentage">3%</div>
+          <h3>Liquidity Pool</h3>
+          <p>3% of every transaction is added to the liquidity pool, ensuring stable trading and increasing the price floor over time.</p>
+        </div>
+        <div class="tax-card">
+          <div class="tax-percentage">2%</div>
+          <h3>Marketing & Development</h3>
+          <p>2% of every transaction is allocated to the marketing and development fund to support project growth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section">
+      <h2>Token Utility</h2>
+      <div class="utility-grid">
+        <div class="utility-card">
+          <div class="utility-icon">💰</div>
+          <h3>Staking Rewards</h3>
+          <p>Stake your FDC tokens to earn additional rewards from the ecosystem's revenue.</p>
+        </div>
+        <div class="utility-card">
+          <div class="utility-icon">🏆</div>
+          <h3>Governance</h3>
+          <p>Use your FDC tokens to vote on important project decisions and proposals.</p>
+        </div>
+        <div class="utility-card">
+          <div class="utility-icon">🔒</div>
+          <h3>NFT Access</h3>
+          <p>Hold FDC tokens to gain exclusive access to limited NFT drops and collections.</p>
+        </div>
+        <div class="utility-card">
+          <div class="utility-icon">🎮</div>
+          <h3>Play-to-Earn</h3>
+          <p>Use FDC tokens in our upcoming play-to-earn games and metaverse projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section alt-bg">
+      <h2>Deflationary Mechanism</h2>
+      <div class="deflationary-content">
+        <div class="deflationary-text">
+          <p>Full Degen Coin implements a deflationary mechanism to increase scarcity and value over time:</p>
+          <ul class="deflationary-list">
+            <li><span class="highlight">Automatic Burns:</span> 1% of tokens from the marketing wallet will be burned quarterly.</li>
+            <li><span class="highlight">Buy-Back & Burn:</span> 20% of ecosystem profits will be used to buy back and burn FDC tokens.</li>
+            <li><span class="highlight">Special Events:</span> Community milestone celebrations will include token burns.</li>
+          </ul>
+          <p>Through these mechanisms, the total supply of FDC will decrease over time, potentially increasing the value of remaining tokens.</p>
+        </div>
+        <div class="deflationary-image">
+          <div class="burn-animation">
+            <div class="coin-icon">🔥</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section">
+      <h2>Token Details</h2>
+      <div class="token-details">
+        <div class="detail-item">
+          <h3>Token Name</h3>
+          <p>Full Degen Coin</p>
+        </div>
+        <div class="detail-item">
+          <h3>Token Symbol</h3>
+          <p>FDC</p>
+        </div>
+        <div class="detail-item">
+          <h3>Total Supply</h3>
+          <p>1,000,000,000 FDC</p>
+        </div>
+        <div class="detail-item">
+          <h3>Blockchain</h3>
+          <p>Binance Smart Chain (BSC)</p>
+        </div>
+        <div class="detail-item">
+          <h3>Token Type</h3>
+          <p>BEP-20</p>
+        </div>
+        <div class="detail-item">
+          <h3>Decimals</h3>
+          <p>18</p>
+        </div>
+      </div>
+      <div class="contract-address">
+        <h3>Contract Address</h3>
+        <div class="address-box">
+          <p class="address">0x1234...5678</p>
+          <button class="copy-btn">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section alt-bg">
+      <h2>Vesting Schedule</h2>
+      <p class="section-intro">To ensure long-term project stability and prevent market manipulation, team and advisor tokens follow a strict vesting schedule:</p>
+      
+      <div class="vesting-timeline">
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>Launch</h3>
+            <p>0% of team tokens unlocked</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>3 Months</h3>
+            <p>10% of team tokens unlocked</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>6 Months</h3>
+            <p>25% of team tokens unlocked</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>12 Months</h3>
+            <p>50% of team tokens unlocked</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>18 Months</h3>
+            <p>75% of team tokens unlocked</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-point"></div>
+          <div class="timeline-content">
+            <h3>24 Months</h3>
+            <p>100% of team tokens unlocked</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokenomics-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h3>What makes Full Degen Coin different from other tokens?</h3>
+          <p>Full Degen Coin combines the excitement of meme coins with real utility and sustainable tokenomics. Our reflection mechanism, deflationary model, and community governance set us apart.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I earn passive income with FDC?</h3>
+          <p>Simply by holding FDC tokens in your wallet, you automatically receive a portion of the 5% reflection fee from every transaction, proportional to your holdings.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is the liquidity pool locked?</h3>
+          <p>Yes, the initial liquidity pool is locked for 2 years to ensure stability and build trust with our community.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How can I participate in governance?</h3>
+          <p>FDC holders can vote on proposals through our governance portal, which will be launched in Q3 2023. Voting power is proportional to token holdings.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'TokenomicsView'
+}
+</script>
+
+<style scoped>
+.tokenomics {
+  color: #ffffff;
+}
+
+.tokenomics-hero {
+  text-align: center;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.tokenomics-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tokenomics-section {
+  padding: 4rem 0;
+}
+
+.alt-bg {
+  background-color: rgba(247, 147, 26, 0.05);
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+
+.tokenomics-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tokenomics-section h2:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #f7931a, #ff6b6b);
+  border-radius: 2px;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Distribution Chart */
+.distribution-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.distribution-chart {
+  flex: 1;
+  min-width: 300px;
+}
+
+.chart-placeholder {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.segment-1 {
+  background-color: #f7931a;
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
+}
+
+.segment-2 {
+  background-color: #ff6b6b;
+  clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
+}
+
+.segment-3 {
+  background-color: #4cd964;
+  clip-path: polygon(50% 50%, 50% 100%, 0% 100%, 0% 75%);
+}
+
+.segment-4 {
+  background-color: #5ac8fa;
+  clip-path: polygon(50% 50%, 0% 75%, 0% 25%);
+}
+
+.segment-5 {
+  background-color: #007aff;
+  clip-path: polygon(50% 50%, 0% 25%, 25% 0%);
+}
+
+.segment-6 {
+  background-color: #5856d6;
+  clip-path: polygon(50% 50%, 25% 0%, 50% 0%);
+}
+
+.distribution-details {
+  flex: 1;
+  min-width: 300px;
+}
+
+.distribution-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.color-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.ci-1 { background-color: #f7931a; }
+.ci-2 { background-color: #ff6b6b; }
+.ci-3 { background-color: #4cd964; }
+.ci-4 { background-color: #5ac8fa; }
+.ci-5 { background-color: #007aff; }
+.ci-6 { background-color: #5856d6; }
+
+.distribution-text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #ffffff;
+}
+
+.distribution-text p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Tax Cards */
+.tax-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.tax-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tax-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tax-percentage {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #f7931a;
+  margin-bottom: 1rem;
+}
+
+.tax-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.tax-card p {
+  line-height: 1.6;
+}
+
+/* Utility Grid */
+.utility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.utility-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.utility-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.utility-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.utility-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #f7931a;
+}
+
+/* Deflationary Mechanism */
+.deflationary-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.deflationary-text {
+  flex: 2;
+}
+
+.deflationary-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.deflationary-list {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.deflationary-list li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: #f7931a;
+  font-weight: 600;
+}
+
+.deflationary-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.burn-animation {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: rgba(247, 147, 26, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coin-icon {
+  font-size: 4rem;
+  animation: burn 3s infinite;
+}
+
+@keyframes burn {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Token Details */
+.token-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.detail-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.detail-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #f7931a;
+}
+
+.contract-address {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.contract-address h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #f7931a;
+}
+
+.address-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.address {
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+.copy-btn {
+  background-color: #f7931a;
+  color: #000000;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.copy-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Vesting Timeline */
+.vesting-timeline {
+  max-width: 800px;
+  margin: 3rem auto 0;
+  position: relative;
+}
+
+.vesting-timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #f7931a, #ff6b6b);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-point {
+  width: 20px;
+  height: 20px;
+  background-color: #f7931a;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.timeline-content {
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+  position: relative;
+  text-align: center;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-right: 50%;
+  margin-left: 2rem;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: 50%;
+  margin-right: 2rem;
+}
+
+.timeline-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #f7931a;
+}
+
+/* FAQ Section */
+.faq-container {
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.faq-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.faq-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #f7931a;
+}
+
+.faq-item p {
+  line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .distribution-container {
+    flex-direction: column;
+  }
+  
+  .deflationary-content {
+    flex-direction: column;
+  }
+  
+  .vesting-timeline:before {
+    left: 20px;
+  }
+  
+  .timeline-point {
+    left: 20px;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 50px;
+    margin-right: 0;
+    width: calc(100% - 70px);
+  }
+}
+
+@media (max-width: 768px) {
+  .tokenomics-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .chart-placeholder {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .tax-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tax-card {
+    width: 100%;
+  }
+  
+  .address-box {
+    flex-direction: column;
+  }
+}
+</style> 
