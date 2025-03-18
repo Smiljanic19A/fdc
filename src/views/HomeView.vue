@@ -140,7 +140,7 @@
                 bottom: dollar.y + 'px'
               }"
             >
-              💵
+              <img class="dollar-sign" src="/logo_transparent.png">
             </div>
 
             <div 
@@ -152,10 +152,7 @@
                 bottom: lady.y + 'px'
               }"
             >
-              <svg width="30" height="30" viewBox="0 0 100 100">
-                <path d="M50 10 C20 10 20 50 50 80 C80 50 80 10 50 10" fill="#ff69b4"/>
-                <circle cx="50" cy="35" r="15" fill="#fff"/>
-              </svg>
+              <img class="lady-bonus" src="/not boobs.png"/>
             </div>
 
             <div 
@@ -1062,12 +1059,12 @@ export default {
 .dollar-sign {
   position: absolute;
   font-size: 24px;
-  width: 30px;
-  height: 30px;
+  width: 60;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: spin 2s linear infinite;
+  animation: spin 5s linear infinite;
 }
 
 @keyframes spin {
@@ -1134,12 +1131,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: float 3s ease-in-out infinite;
+  animation: pulse-danger 1s ease-in-out infinite;
 }
 
-.lady-bonus svg {
-  filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.7));
-}
 
 @keyframes float {
   0%, 100% {
