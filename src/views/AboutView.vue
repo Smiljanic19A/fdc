@@ -14,7 +14,7 @@
           <p>We're on a mission to create a memecoin that stands as the BTC of memecoins, destined to evolve into a vibrant ecosystem with a community of diamond hands who are all in on the long-term vision of this epic project.</p>
         </div>
         <div class="about-image">
-          <img src="/logo.png" alt="Full Degen Coin Logo" class="about-logo">
+          <img src="/logo_transparent.png" alt="Full Degen Coin Logo" class="about-logo">
         </div>
       </div>
     </section>
@@ -160,9 +160,31 @@
 
 .about-logo {
   max-width: 250px;
-  animation: float 6s ease-in-out infinite;
+  animation: circleFloat 8s linear infinite;
 }
 
+.about-logo:hover {
+  background-color: #a526a6;
+  border-radius: 18px
+}
+
+@keyframes circleFloat {
+  0% {
+    transform: rotate(0deg) translateX(30px) rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg) translateX(30px) rotate(-90deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(30px) rotate(-180deg);
+  }
+  75% {
+    transform: rotate(270deg) translateX(30px) rotate(-270deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(30px) rotate(-360deg);
+  }
+}
 @keyframes float {
   0% {
     transform: translateY(0px);
