@@ -74,11 +74,6 @@
       <h2>Token Utility</h2>
       <div class="utility-grid">
         <div class="utility-card">
-          <div class="utility-icon">💰</div>
-          <h3>Staking Rewards</h3>
-          <p>Stake your FDC tokens to earn additional rewards from the ecosystem's revenue.</p>
-        </div>
-        <div class="utility-card">
           <div class="utility-icon">🏆</div>
           <h3>Governance</h3>
           <p>Use your FDC tokens to vote on important project decisions and proposals.</p>
@@ -92,26 +87,6 @@
           <div class="utility-icon">🎮</div>
           <h3>Play-to-Earn</h3>
           <p>Use FDC tokens in our upcoming play-to-earn games and metaverse projects.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="tokenomics-section alt-bg">
-      <h2>Deflationary Mechanism</h2>
-      <div class="deflationary-content">
-        <div class="deflationary-text">
-          <p>Full Degen Coin implements a deflationary mechanism to increase scarcity and value over time:</p>
-          <ul class="deflationary-list">
-            <li><span class="highlight">Automatic Burns:</span> 1% of tokens from the marketing wallet will be burned quarterly.</li>
-            <li><span class="highlight">Buy-Back & Burn:</span> 20% of ecosystem profits will be used to buy back and burn FDC tokens.</li>
-            <li><span class="highlight">Special Events:</span> Community milestone celebrations will include token burns.</li>
-          </ul>
-          <p>Through these mechanisms, the total supply of FDC will decrease over time, potentially increasing the value of remaining tokens.</p>
-        </div>
-        <div class="deflationary-image">
-          <div class="burn-animation">
-            <div class="coin-icon">🔥</div>
-          </div>
         </div>
       </div>
     </section>
@@ -155,7 +130,7 @@
       <div class="faq-container">
         <div class="faq-item">
           <h3>What makes Full Degen Coin different from other tokens?</h3>
-          <p>Full Degen Coin combines the excitement of meme coins with real utility and sustainable tokenomics. Our reflection mechanism, deflationary model, and community governance set us apart.</p>
+          <p>FDC is a coin built for the trenches by the trenches. We refuse to lose - refuse to lose our money, refuse to lose our time, refuse to lose our community. We are a community coin, built by the community, for the community.</p>
         </div>
         <div class="faq-item">
           <h3>How do I earn passive income with FDC?</h3>
@@ -163,7 +138,7 @@
         </div>
         <div class="faq-item">
           <h3>Is the liquidity pool locked?</h3>
-          <p>Yes, the initial liquidity pool is locked for 2 years to ensure stability and build trust with our community.</p>
+          <p>Yes, the initial liquidity pool is locked for 2 years to ensure stability and build trust with our community. The LP tokens are permanently burned.</p>
         </div>
         <div class="faq-item">
           <h3>How can I participate in governance?</h3>
@@ -213,6 +188,15 @@ export default {
             },
             tooltip: {
               enabled: true,
+              bodyFont: {
+                size: 40,
+                weight: 'bold'
+              },
+              padding: 20,
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              titleFont: {
+                size: 40
+              },
               callbacks: {
                 label: (context) => {
                   const value = context.raw
@@ -224,7 +208,7 @@ export default {
           animation: {
             animateRotate: true,
             animateScale: true,
-            duration: 2000,
+            duration: 1000,
             easing: 'easeInOutQuart'
           }
         }
