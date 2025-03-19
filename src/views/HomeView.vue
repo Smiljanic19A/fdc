@@ -172,6 +172,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Wallet Warning Modal -->
+    <div v-if="showWalletModal" class="modal-overlay" @click="showWalletModal = false">
+      <div class="modal-content wallet-warning" @click.stop>
+        <button class="close-btn" @click="showWalletModal = false">×</button>
+        <div class="modal-body wallet-warning-content">
+          <h2>Connect Wallet Required</h2>
+          <p>Please connect your wallet to play the game!</p>
+          <button class="primary-btn" @click="handleWalletWarningClick">Connect Wallet</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -205,9 +217,15 @@ export default {
       },
       touchStartX: 0,
       touchStartY: 0,
-      walletButtonText: 'Connect Wallet',
-      provider: null,
-      wallet: null,
+      showWalletModal: false,
+    }
+  },
+  computed: {
+    walletButtonText() {
+      return this.$store.state.walletButtonText;
+    },
+    wallet() {
+      return this.$store.state.wallet;
     }
   },
   mounted() {
@@ -217,7 +235,7 @@ export default {
     // Check if wallet was previously connected
     if (localStorage.getItem('walletConnected') === 'true') {
       this.$nextTick(() => {
-      this.connectWallet();
+        this.$store.dispatch('connectWallet');
       });
     }
   },
@@ -600,77 +618,20 @@ export default {
       
       this.gameLoop = requestAnimationFrame(this.updateGame);
     },
-    async connectWallet() {
-      try {
-        // First check if wallet is already connected
-        if (this.provider && this.wallet) {
-          // Try to disconnect
-          try {
-            await this.provider.disconnect();
-          } catch (err) {
-            console.log('Disconnect error:', err);
-          }
-          this.provider = null;
-          this.wallet = null;
-          this.walletButtonText = 'Connect Wallet';
-          localStorage.removeItem('walletConnected');
-          return;
-        }
-
-        // Check if Phantom is installed
-        if (!window.phantom?.solana) {
-          window.open('https://phantom.app/', '_blank');
-          alert('Please install Phantom wallet from phantom.app');
-          return;
-        }
-
-        // Get provider
-        const provider = window.phantom?.solana;
-
-        if (!provider?.isPhantom) {
-          window.open('https://phantom.app/', '_blank');
-          alert('Please install Phantom wallet from phantom.app');
-          return;
-        }
-
-        try {
-          // Connect to wallet
-          const resp = await provider.connect();
-          const publicKey = resp.publicKey.toString();
-
-          // Store connection info
-          this.provider = provider;
-          this.wallet = publicKey;
-          this.walletButtonText = 'Disconnect Wallet';
-          localStorage.setItem('walletConnected', 'true');
-
-        } catch (err) {
-          if (err.code === 4001) {
-            console.log('User rejected the connection');
-          } else if (err.code === -32002) {
-            // Connection request already pending
-            alert('Connection request already pending. Please check your Phantom wallet.');
-          } else {
-            console.error('Connection error:', err);
-            alert('Failed to connect to wallet. Please try again.');
-          }
-          this.walletButtonText = 'Connect Wallet';
-          localStorage.removeItem('walletConnected');
-        }
-
-      } catch (error) {
-        console.error('Wallet setup error:', error);
-        this.walletButtonText = 'Connect Wallet';
-        localStorage.removeItem('walletConnected');
-      }
+    connectWallet() {
+      this.$store.dispatch('connectWallet');
     },
     handleFbgmClick() {
-      if (!this.wallet) {
-        alert('Please connect your wallet to play!');
+      if (!this.$store.getters.isWalletConnected) {
+        this.showWalletModal = true;
         return;
       }
       this.showFbgmModal = true;
     },
+    handleWalletWarningClick() {
+      this.showWalletModal = false;
+      this.$store.dispatch('connectWallet');
+    }
   },
   watch: {
     showFbgmModal(newVal) {
@@ -1377,5 +1338,31 @@ export default {
   background-color: #f0c225;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(166, 39, 168, 0.4);
+}
+
+.wallet-warning {
+  width: 400px !important;
+  height: auto !important;
+  padding: 2rem;
+}
+
+.wallet-warning-content {
+  text-align: center;
+}
+
+.wallet-warning-content h2 {
+  color: #f0c225;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.wallet-warning-content p {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.wallet-warning-content .primary-btn {
+  display: inline-block;
+  margin: 0 auto;
 }
 </style>
