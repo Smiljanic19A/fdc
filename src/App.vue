@@ -21,7 +21,6 @@
       <div class="social-links">
         <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
         <a href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
-        <a href="#" target="_blank" rel="noopener noreferrer">Discord</a>
       </div>
     </footer>
   </div>

@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="/logo.png" alt="Full Degen Coin" class="coin-logo">
+        <img src="/logo_transparent.png" alt="Full Degen Coin" class="coin-logo">
         <div class="glow-effect"></div>
       </div>
     </section>
@@ -758,12 +758,63 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
+  transition: transform 0.3s ease-out;
 }
 
 .coin-logo {
   max-width: 300px;
-  animation: float 6s ease-in-out infinite;
+  animation: circleFloat 8s linear infinite;
   z-index: 2;
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+}
+
+.coin-logo:hover {
+  transform: scale(1.2);
+  background-color: #a526a6;
+  border-radius: 18px
+}
+
+@keyframes circleFloat {
+  0% {
+    transform: rotate(0deg) translateX(30px) rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg) translateX(30px) rotate(-90deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(30px) rotate(-180deg);
+  }
+  75% {
+    transform: rotate(270deg) translateX(30px) rotate(-270deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(30px) rotate(-360deg);
+  }
+}
+
+@keyframes circleFloatHover {
+  0% {
+    transform: rotate(0deg) translateX(40px) rotate(0deg) scale(1.2);
+  }
+  25% {
+    transform: rotate(90deg) translateX(40px) rotate(-90deg) scale(1.2);
+  }
+  50% {
+    transform: rotate(180deg) translateX(40px) rotate(-180deg) scale(1.2);
+  }
+  75% {
+    transform: rotate(270deg) translateX(40px) rotate(-270deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) translateX(40px) rotate(-360deg) scale(1.2);
+  }
+}
+
+/* Add glow effect on hover */
+.hero-image:hover .glow-effect {
+  background: radial-gradient(circle, rgba(166, 39, 168, 0.6) 0%, rgba(166, 39, 168, 0) 70%);
+  transform: scale(1.2);
 }
 
 .glow-effect {
@@ -773,18 +824,7 @@ export default {
   background: radial-gradient(circle, rgba(166, 39, 168, 0.4) 0%, rgba(166, 39, 168, 0) 70%);
   border-radius: 50%;
   animation: pulse 4s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  transition: all 0.3s ease-out;
 }
 
 @keyframes pulse {
