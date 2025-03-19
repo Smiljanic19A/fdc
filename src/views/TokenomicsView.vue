@@ -692,8 +692,8 @@ canvas:hover {
     min-width: unset;
     width: 100%;
     margin-right: 0;
-    height: 300px;
-    transform: perspective(1000px) rotateX(30deg) scale(0.8);
+    height: 400px;
+    transform: perspective(1000px) rotateX(30deg) scale(0.9);
   }
   
   .tax-cards {
@@ -707,6 +707,17 @@ canvas:hover {
   
   .address-box {
     flex-direction: column;
+  }
+  
+  .color-indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+
+  .distribution-text h3 {
+    font-size: 1.2rem;
   }
 }
 </style> 
