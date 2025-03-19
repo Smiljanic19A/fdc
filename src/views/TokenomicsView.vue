@@ -9,57 +9,42 @@
       <h2>Token Distribution</h2>
       <div class="distribution-container">
         <div class="distribution-chart">
-          <!-- Placeholder for chart - in a real app, you'd use a chart library like Chart.js -->
-          <div class="chart-placeholder">
-            <div class="segment segment-1" title="Public Sale: 40%"></div>
-            <div class="segment segment-2" title="Liquidity: 30%"></div>
-            <div class="segment segment-3" title="Team: 10%"></div>
-            <div class="segment segment-4" title="Marketing: 10%"></div>
-            <div class="segment segment-5" title="Development: 5%"></div>
-            <div class="segment segment-6" title="Community Rewards: 5%"></div>
-          </div>
+          <canvas ref="tokenChart" width="400" height="400"></canvas>
         </div>
         <div class="distribution-details">
           <div class="distribution-item">
             <div class="color-indicator ci-1"></div>
             <div class="distribution-text">
-              <h3>Public Sale: 40%</h3>
-              <p>400,000,000 FDC tokens available for public purchase</p>
+              <h3>Treasury Management: 42.5%</h3>
+              <p>425,000,000 FDC tokens for treasury and operational management</p>
             </div>
           </div>
           <div class="distribution-item">
             <div class="color-indicator ci-2"></div>
             <div class="distribution-text">
-              <h3>Liquidity: 30%</h3>
-              <p>300,000,000 FDC tokens locked for liquidity provision</p>
+              <h3>Team: 30%</h3>
+              <p>300,000,000 FDC tokens allocated to the team (vested over 2 years)</p>
             </div>
           </div>
           <div class="distribution-item">
             <div class="color-indicator ci-3"></div>
             <div class="distribution-text">
-              <h3>Team: 10%</h3>
-              <p>100,000,000 FDC tokens allocated to the team (vested over 2 years)</p>
+              <h3>Partnerships: 20%</h3>
+              <p>200,000,000 FDC tokens for strategic partnerships</p>
             </div>
           </div>
           <div class="distribution-item">
             <div class="color-indicator ci-4"></div>
             <div class="distribution-text">
-              <h3>Marketing: 10%</h3>
-              <p>100,000,000 FDC tokens for marketing initiatives</p>
+              <h3>Advertising: 5%</h3>
+              <p>50,000,000 FDC tokens for marketing and advertising initiatives</p>
             </div>
           </div>
           <div class="distribution-item">
             <div class="color-indicator ci-5"></div>
             <div class="distribution-text">
-              <h3>Development: 5%</h3>
-              <p>50,000,000 FDC tokens for ongoing development</p>
-            </div>
-          </div>
-          <div class="distribution-item">
-            <div class="color-indicator ci-6"></div>
-            <div class="distribution-text">
-              <h3>Community Rewards: 5%</h3>
-              <p>50,000,000 FDC tokens for community incentives and rewards</p>
+              <h3>Ecosystem Rewards: 2.5%</h3>
+              <p>25,000,000 FDC tokens for ecosystem development and rewards</p>
             </div>
           </div>
         </div>
@@ -77,15 +62,11 @@
           <p>5% of every transaction is redistributed to all FDC holders proportional to their holdings, rewarding long-term investors.</p>
         </div>
         <div class="tax-card">
-          <div class="tax-percentage">3%</div>
+          <div class="tax-percentage">2.5%</div>
           <h3>Liquidity Pool</h3>
-          <p>3% of every transaction is added to the liquidity pool, ensuring stable trading and increasing the price floor over time.</p>
+          <p>2.5% of every transaction is added to the liquidity pool, ensuring stable trading and increasing the price floor over time.</p>
         </div>
-        <div class="tax-card">
-          <div class="tax-percentage">2%</div>
-          <h3>Marketing & Development</h3>
-          <p>2% of every transaction is allocated to the marketing and development fund to support project growth.</p>
-        </div>
+        
       </div>
     </section>
 
@@ -154,10 +135,7 @@
           <h3>Blockchain</h3>
           <p>Binance Smart Chain (BSC)</p>
         </div>
-        <div class="detail-item">
-          <h3>Token Type</h3>
-          <p>BEP-20</p>
-        </div>
+      
         <div class="detail-item">
           <h3>Decimals</h3>
           <p>18</p>
@@ -168,56 +146,6 @@
         <div class="address-box">
           <p class="address">0x1234...5678</p>
           <button class="copy-btn">Copy</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="tokenomics-section alt-bg">
-      <h2>Vesting Schedule</h2>
-      <p class="section-intro">To ensure long-term project stability and prevent market manipulation, team and advisor tokens follow a strict vesting schedule:</p>
-      
-      <div class="vesting-timeline">
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>Launch</h3>
-            <p>0% of team tokens unlocked</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>3 Months</h3>
-            <p>10% of team tokens unlocked</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>6 Months</h3>
-            <p>25% of team tokens unlocked</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>12 Months</h3>
-            <p>50% of team tokens unlocked</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>18 Months</h3>
-            <p>75% of team tokens unlocked</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-point"></div>
-          <div class="timeline-content">
-            <h3>24 Months</h3>
-            <p>100% of team tokens unlocked</p>
-          </div>
         </div>
       </div>
     </section>
@@ -247,8 +175,62 @@
 </template>
 
 <script>
+import Chart from 'chart.js/auto'
+
 export default {
-  name: 'TokenomicsView'
+  name: 'TokenomicsView',
+  mounted() {
+    this.initChart()
+  },
+  methods: {
+    initChart() {
+      const ctx = this.$refs.tokenChart.getContext('2d')
+      
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Treasury Management', 'Team', 'Partnerships', 'Advertising', 'Ecosystem Rewards'],
+          datasets: [{
+            data: [42.5, 30, 20, 5, 2.5],
+            backgroundColor: [
+              '#e01a4f', // Treasury Management - Red
+              '#545776', // Blue
+              '#dddef2', // Yellow
+              '#f1e940', // Light Blue
+              '#66ff66'  // Dark Blue
+            ],
+            borderWidth: 1,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            hoverOffset: 20
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: (context) => {
+                  const value = context.raw
+                  return `${value}%`
+                }
+              }
+            }
+          },
+          animation: {
+            animateRotate: true,
+            animateScale: true,
+            duration: 2000,
+            easing: 'easeInOutQuart'
+          }
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -321,67 +303,37 @@ export default {
 /* Distribution Chart */
 .distribution-container {
   display: flex;
-  align-items: center;
-  gap: 3rem;
+  align-items: flex-start;
+  gap: 6rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+  padding: 40px;
 }
 
 .distribution-chart {
   flex: 1;
-  min-width: 300px;
-}
-
-.chart-placeholder {
-  width: 300px;
-  height: 300px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
-  margin: 0 auto;
+  min-width: 400px;
+  margin-right: 60px;
+  height: 400px;
   position: relative;
-  overflow: hidden;
+  transform: perspective(1000px) rotateX(30deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.3));
 }
 
-.segment {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-origin: center;
+canvas {
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 
-.segment-1 {
-  background-color: #a627a8;
-  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
-}
-
-.segment-2 {
-  background-color: #f0c225;
-  clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
-}
-
-.segment-3 {
-  background-color: #9bf6fd;
-  clip-path: polygon(50% 50%, 50% 100%, 0% 100%, 0% 75%);
-}
-
-.segment-4 {
-  background-color: #5ac8fa;
-  clip-path: polygon(50% 50%, 0% 75%, 0% 25%);
-}
-
-.segment-5 {
-  background-color: #007aff;
-  clip-path: polygon(50% 50%, 0% 25%, 25% 0%);
-}
-
-.segment-6 {
-  background-color: #5856d6;
-  clip-path: polygon(50% 50%, 25% 0%, 50% 0%);
+canvas:hover {
+  transform: scale(0.95);
 }
 
 .distribution-details {
   flex: 1;
   min-width: 300px;
+  margin-top: 20px;
 }
 
 .distribution-item {
@@ -391,28 +343,29 @@ export default {
 }
 
 .color-indicator {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 4px;
-  margin-right: 1rem;
+  margin-right: 12px;
 }
 
-.ci-1 { background-color: #a627a8; }
-.ci-2 { background-color: #f0c225; }
-.ci-3 { background-color: #9bf6fd; }
-.ci-4 { background-color: #5ac8fa; }
-.ci-5 { background-color: #007aff; }
-.ci-6 { background-color: #5856d6; }
+.ci-1 { background-color: #e01a4f; } /* Treasury Management - Red */
+.ci-2 { background-color: #545776; } /* Team - Blue */
+.ci-3 { background-color: #dddef2; } /* Partnerships - Yellow */
+.ci-4 { background-color: #f1e940; } /* Advertising - Light Blue */
+.ci-5 { background-color: #66ff66; } /* Ecosystem Rewards - Dark Blue */
 
 .distribution-text h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
   color: #ffffff;
+  font-weight: 500;
 }
 
 .distribution-text p {
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
 }
 
 /* Tax Cards */
@@ -746,9 +699,11 @@ export default {
     font-size: 1.2rem;
   }
   
-  .chart-placeholder {
-    width: 250px;
-    height: 250px;
+  .distribution-chart {
+    width: 300px;
+    height: 200px;
+    margin-left: -25px;
+    transform: scale(0.8) rotateX(30deg);
   }
   
   .tax-cards {

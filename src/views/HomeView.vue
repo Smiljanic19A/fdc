@@ -197,6 +197,7 @@ export default {
       dollarSpawnTimer: null,
       ladySpawnTimer: null,
       skullSpawnTimer: null,
+      difficultyLevel: 1,
       keys: {
         left: false,
         right: false,
@@ -223,6 +224,28 @@ export default {
         localStorage.setItem('fbgmHighScore', this.score.toString());
         this.isNewHighScore = true;
       }
+    },
+    getDifficultyLevel() {
+      return Math.floor(this.score / 20) + 1;
+    },
+    getRandomDiagonalAngle() {
+      // Generate random diagonal angles based on difficulty
+      const angles = [];
+      const baseAngles = [-45, -30, 0, 30, 45];
+      const difficulty = this.getDifficultyLevel();
+      
+      // Add more extreme angles as difficulty increases
+      if (difficulty >= 3) angles.push(-60, 60);
+      if (difficulty >= 4) angles.push(-75, 75);
+      
+      return baseAngles[Math.floor(Math.random() * baseAngles.length)] * (Math.PI / 180);
+    },
+    calculateVelocities(baseSpeed) {
+      const angle = this.getRandomDiagonalAngle();
+      return {
+        vx: Math.sin(angle) * baseSpeed,
+        vy: -Math.cos(angle) * baseSpeed
+      };
     },
     startGame() {
       this.gameOver = false;
@@ -278,35 +301,59 @@ export default {
     },
     startSkullSpawning() {
       this.skullSpawnTimer = setInterval(() => {
+        const difficulty = this.getDifficultyLevel();
+        const spawnInterval = Math.max(4000 - (difficulty * 500), 1500); // Decrease interval with difficulty, min 1.5s
+        clearInterval(this.skullSpawnTimer);
+        this.skullSpawnTimer = setInterval(() => this.spawnSkull(), spawnInterval);
         this.spawnSkull();
-      }, 4000); // Spawn a new skull every 4 seconds
+      }, 4000);
     },
     spawnDollar() {
       const worldWidth = 800;
       const worldHeight = 500;
+      const difficulty = this.getDifficultyLevel();
+      const baseSpeed = 2 + Math.random() * 2 + (difficulty * 0.5);
+      const velocities = this.calculateVelocities(baseSpeed);
+      
       this.dollars.push({
         x: Math.random() * (worldWidth - 30),
         y: worldHeight,
-        velocity: -(2 + Math.random() * 2)
+        vx: velocities.vx,
+        vy: velocities.vy
       });
     },
     spawnLady() {
       const worldWidth = 800;
       const worldHeight = 500;
+      const difficulty = this.getDifficultyLevel();
+      const baseSpeed = 1.5 + Math.random() * 1.5 + (difficulty * 0.3);
+      const velocities = this.calculateVelocities(baseSpeed);
+      
       this.ladies.push({
         x: Math.random() * (worldWidth - 30),
         y: worldHeight,
-        velocity: -(1.5 + Math.random() * 1.5)
+        vx: velocities.vx,
+        vy: velocities.vy
       });
     },
     spawnSkull() {
       const worldWidth = 800;
       const worldHeight = 500;
-      this.skulls.push({
-        x: Math.random() * (worldWidth - 30),
-        y: worldHeight,
-        velocity: -(3 + Math.random() * 2) // Faster than other items
-      });
+      const difficulty = this.getDifficultyLevel();
+      const baseSpeed = 3 + Math.random() * 2 + (difficulty * 0.7);
+      const velocities = this.calculateVelocities(baseSpeed);
+      
+      // Spawn multiple skulls based on difficulty
+      const skullCount = Math.min(difficulty, 3); // Max 3 skulls at once
+      
+      for (let i = 0; i < skullCount; i++) {
+        this.skulls.push({
+          x: Math.random() * (worldWidth - 30),
+          y: worldHeight,
+          vx: velocities.vx,
+          vy: velocities.vy
+        });
+      }
     },
     checkCollision(item) {
       const playerWidth = 60;
@@ -491,10 +538,11 @@ export default {
         this.isJumping = false;
       }
 
-      // Update dollars
+      // Update dollars with diagonal movement
       for (let i = this.dollars.length - 1; i >= 0; i--) {
         const dollar = this.dollars[i];
-        dollar.y += dollar.velocity;
+        dollar.x += dollar.vx;
+        dollar.y += dollar.vy;
 
         if (this.checkCollision(dollar)) {
           this.score++;
@@ -502,38 +550,40 @@ export default {
           continue;
         }
 
-        if (dollar.y < -30) {
+        if (dollar.y < -30 || dollar.x < -30 || dollar.x > 830) {
           this.dollars.splice(i, 1);
         }
       }
 
-      // Update ladies
+      // Update ladies with diagonal movement
       for (let i = this.ladies.length - 1; i >= 0; i--) {
         const lady = this.ladies[i];
-        lady.y += lady.velocity;
+        lady.x += lady.vx;
+        lady.y += lady.vy;
 
         if (this.checkCollision(lady)) {
-          this.score += 2; // Double points for lady bonus
+          this.score += 2;
           this.ladies.splice(i, 1);
           continue;
         }
 
-        if (lady.y < -30) {
+        if (lady.y < -30 || lady.x < -30 || lady.x > 830) {
           this.ladies.splice(i, 1);
         }
       }
 
-      // Update skulls
+      // Update skulls with diagonal movement
       for (let i = this.skulls.length - 1; i >= 0; i--) {
         const skull = this.skulls[i];
-        skull.y += skull.velocity;
+        skull.x += skull.vx;
+        skull.y += skull.vy;
 
         if (this.checkCollision(skull)) {
           this.handleGameOver();
           return;
         }
 
-        if (skull.y < -30) {
+        if (skull.y < -30 || skull.x < -30 || skull.x > 830) {
           this.skulls.splice(i, 1);
         }
       }

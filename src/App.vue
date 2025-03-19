@@ -9,7 +9,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/tokenomics">Tokenomics</router-link>
-        <router-link to="/roadmap">Roadmap</router-link>
+        <!-- <router-link to="/roadmap">Roadmap</router-link> -->
         <a href="#" class="buy-button">Buy Now</a>
       </nav>
     </header>
