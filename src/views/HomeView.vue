@@ -40,7 +40,7 @@
 
     <!-- FBGM Button -->
     <div class="fbgm-container">
-      <button class="fbgm-btn" @click="showFbgmModal = true">FBGM</button>
+      <button class="fbgm-btn" @click="handleFbgmClick">FBGM</button>
     </div>
 
     <!-- Tokenomics Preview -->
@@ -606,11 +606,7 @@ export default {
         if (this.provider && this.wallet) {
           // Try to disconnect
           try {
-            // Properly disconnect from Phantom
-            const provider = window.phantom?.solana;
-            if (provider) {
-              await provider.disconnect();
-            }
+            await this.provider.disconnect();
           } catch (err) {
             console.log('Disconnect error:', err);
           }
@@ -622,7 +618,7 @@ export default {
         }
 
         // Check if Phantom is installed
-        if (!('phantom' in window)) {
+        if (!window.phantom?.solana) {
           window.open('https://phantom.app/', '_blank');
           alert('Please install Phantom wallet from phantom.app');
           return;
@@ -638,10 +634,7 @@ export default {
         }
 
         try {
-          // Force the wallet selection screen
-          await provider.request({ method: "connect" });
-          
-          // Get the public key
+          // Connect to wallet
           const resp = await provider.connect();
           const publicKey = resp.publicKey.toString();
 
@@ -653,7 +646,6 @@ export default {
 
         } catch (err) {
           if (err.code === 4001) {
-            // User rejected the connection
             console.log('User rejected the connection');
           } else if (err.code === -32002) {
             // Connection request already pending
@@ -671,6 +663,13 @@ export default {
         this.walletButtonText = 'Connect Wallet';
         localStorage.removeItem('walletConnected');
       }
+    },
+    handleFbgmClick() {
+      if (!this.wallet) {
+        alert('Please connect your wallet to play!');
+        return;
+      }
+      this.showFbgmModal = true;
     },
   },
   watch: {
