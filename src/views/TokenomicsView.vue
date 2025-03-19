@@ -683,11 +683,17 @@ canvas:hover {
     font-size: 1.2rem;
   }
   
+  .distribution-container {
+    padding: 20px;
+    gap: 2rem;
+  }
+
   .distribution-chart {
-    width: 300px;
-    height: 200px;
-    margin-left: -25px;
-    transform: scale(0.8) rotateX(30deg);
+    min-width: unset;
+    width: 100%;
+    margin-right: 0;
+    height: 300px;
+    transform: perspective(1000px) rotateX(30deg) scale(0.8);
   }
   
   .tax-cards {
