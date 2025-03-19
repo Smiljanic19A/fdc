@@ -604,9 +604,13 @@ export default {
       try {
         // First check if wallet is already connected
         if (this.provider && this.wallet) {
-          // Try to disconnect first
+          // Try to disconnect
           try {
-            await this.provider.disconnect();
+            // Properly disconnect from Phantom
+            const provider = window.phantom?.solana;
+            if (provider) {
+              await provider.disconnect();
+            }
           } catch (err) {
             console.log('Disconnect error:', err);
           }
@@ -619,8 +623,8 @@ export default {
 
         // Check if Phantom is installed
         if (!('phantom' in window)) {
-          alert('Phantom wallet is not installed! Please install it from phantom.app');
           window.open('https://phantom.app/', '_blank');
+          alert('Please install Phantom wallet from phantom.app');
           return;
         }
 
@@ -628,21 +632,23 @@ export default {
         const provider = window.phantom?.solana;
 
         if (!provider?.isPhantom) {
-          alert('Phantom wallet is not installed! Please install it from phantom.app');
           window.open('https://phantom.app/', '_blank');
+          alert('Please install Phantom wallet from phantom.app');
           return;
         }
 
         try {
-          // Request connection to wallet with explicit network
-          const resp = await provider.connect({
-            onlyIfTrusted: false // This will always prompt the user
-          });
+          // Force the wallet selection screen
+          await provider.request({ method: "connect" });
+          
+          // Get the public key
+          const resp = await provider.connect();
+          const publicKey = resp.publicKey.toString();
 
           // Store connection info
           this.provider = provider;
-          this.wallet = resp.publicKey.toString();
-          this.walletButtonText = this.wallet.slice(0, 4) + '...' + this.wallet.slice(-4);
+          this.wallet = publicKey;
+          this.walletButtonText = 'Disconnect Wallet';
           localStorage.setItem('walletConnected', 'true');
 
         } catch (err) {
