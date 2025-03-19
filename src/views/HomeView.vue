@@ -128,7 +128,7 @@
                 transform: `scaleX(${playerDirection})`
               }"
             >
-              <img src="/lex.png" alt="Player" class="player-sprite">
+              <img src="/lexa.png" alt="Player" class="player-sprite">
             </div>
 
             <div 
