@@ -9,9 +9,9 @@
       <h2>Our Story</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>Full Degen Coin (FDC) was born out of a simple idea: create a cryptocurrency that embraces the spirit of the degen community while providing real utility and value.</p>
-          <p>Founded in 2023 by a team of blockchain enthusiasts and crypto veterans, FDC quickly gained traction among traders looking for the next moonshot with actual substance behind it.</p>
-          <p>What started as a meme has evolved into a thriving ecosystem with a passionate community of holders who believe in the long-term vision of the project.</p>
+          <p>Full Degen Coin (FDC) was born from the wildest dreams of the crypto trenches, crafted by the true degens for the degens.</p>
+          <p>Launched in 2025 by a squad of blockchain fanatics and crypto OGs, FDC quickly became the talk of the town among moonshot hunters who crave real substance.</p>
+          <p>We're on a mission to create a memecoin that stands as the BTC of memecoins, destined to evolve into a vibrant ecosystem with a community of diamond hands who are all in on the long-term vision of this epic project.</p>
         </div>
         <div class="about-image">
           <img src="/logo.png" alt="Full Degen Coin Logo" class="about-logo">
@@ -27,8 +27,8 @@
           <p>Build and nurture the strongest community in crypto, where every holder has a voice in the project's future.</p>
         </div>
         <div class="mission-card">
-          <h3>Transparency</h3>
-          <p>Maintain complete transparency in all operations, from tokenomics to development roadmap and treasury management.</p>
+          <h3>Make people money</h3>
+          <p>We're not just another meme coin. We're a community coin, built by the community, for the community. We're here to make people money.</p>
         </div>
         <div class="mission-card">
           <h3>Innovation</h3>
@@ -42,48 +42,29 @@
       <div class="team-grid">
         <div class="team-member">
           <div class="member-avatar">👨‍💻</div>
-          <h3>Alex "DegenKing" Johnson</h3>
-          <p class="member-role">Founder & Lead Developer</p>
-          <p>Blockchain developer with 7+ years of experience in DeFi projects.</p>
+          <h3>Alex "PhantomSol" Phillips</h3>
+          <p class="member-role">Co-founder</p>
+          <p>One of the original founders of the Full Degen Coin project. He's been in the trenches since the early days of Bitcoin and has a proven track record of success.</p>
+          <a href="https://t.me/AlexDegenKing" class="telegram-link">Telegram</a>
         </div>
         <div class="team-member">
           <div class="member-avatar">👩‍💼</div>
-          <h3>Sarah Williams</h3>
-          <p class="member-role">Marketing Director</p>
-          <p>Former marketing executive for multiple successful crypto startups.</p>
-        </div>
-        <div class="team-member">
-          <div class="member-avatar">👨‍🚀</div>
-          <h3>Mike "Moonshot" Chen</h3>
-          <p class="member-role">Community Manager</p>
-          <p>Crypto enthusiast and community builder since the early days of Bitcoin.</p>
+          <h3>Mark "MoneyMoon" Johnson</h3>
+          <p class="member-role">Co-founder</p>
+          <p>Mark is a seasoned trader with a knack for spotting undervalued gems. He's been in the trenches since the early days of Bitcoin and has a proven track record of success.</p>
+          <a href="https://t.me/SarahWilliams" class="telegram-link">Telegram</a>
         </div>
         <div class="team-member">
           <div class="member-avatar">👩‍🔬</div>
-          <h3>Dr. Lisa Kumar</h3>
-          <p class="member-role">Tokenomics Specialist</p>
-          <p>PhD in Economics with expertise in designing sustainable token economies.</p>
+          <h3>Sam "WhaleWatcher" Abramovich</h3>
+          <p class="member-role">Lead Developer and Co-founder</p>
+          <p>Sam is the lead developer and co-founder of the Full Degen Coin project. He has been a blockchain developer for 5 years and has worked with some of the biggest names in the industry.</p>
+          <a href="https://t.me/MikeMoonshot" class="telegram-link">Telegram</a>
         </div>
       </div>
     </section>
 
-    <section class="about-section alt-bg">
-      <h2>Our Vision</h2>
-      <div class="vision-content">
-        <p class="vision-text">
-          We envision Full Degen Coin becoming more than just another cryptocurrency. Our goal is to build a comprehensive ecosystem that bridges the gap between the degen trading culture and practical financial applications.
-        </p>
-        <p class="vision-text">
-          By 2025, we aim to have established FDC as a recognized brand in the crypto space, with a suite of dApps, NFT collections, and real-world partnerships that provide tangible benefits to our holders.
-        </p>
-        <p class="vision-text">
-          The future of Full Degen Coin is in the hands of our community. Together, we're building something that will stand the test of time in the volatile world of cryptocurrency.
-        </p>
-        <div class="vision-cta">
-          <router-link to="/roadmap" class="vision-btn">View Our Roadmap</router-link>
-        </div>
-      </div>
-    </section>
+   
 
     <section class="about-section">
       <h2>Join the Full Degen Movement</h2>
@@ -91,8 +72,6 @@
       <div class="social-links">
         <a href="#" class="social-link">Twitter</a>
         <a href="#" class="social-link">Telegram</a>
-        <a href="#" class="social-link">Discord</a>
-        <a href="#" class="social-link">Medium</a>
       </div>
     </section>
   </div>
@@ -240,6 +219,10 @@
   border-radius: 10px;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .team-member:hover {
@@ -335,6 +318,21 @@
 
 .social-link:hover:after {
   width: 100%;
+}
+
+.telegram-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #ffffff;
+  background-color: #0088cc;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.telegram-link:hover {
+  background-color: #005f8c;
 }
 
 @media (max-width: 992px) {
