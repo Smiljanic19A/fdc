@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <InitialLoader v-if="showLoader" @animation-complete="hideLoader" />
     <header>
       <div class="logo-container">
         <img src="/logo.png" alt="Full Degen Coin Logo" class="logo">
@@ -27,8 +28,18 @@
 </template>
 
 <script>
+import InitialLoader from './components/InitialLoader.vue'
+
 export default {
   name: 'App',
+  components: {
+    InitialLoader
+  },
+  data() {
+    return {
+      showLoader: true
+    }
+  },
   computed: {
     walletButtonText() {
       return this.$store.state.walletButtonText;
@@ -42,6 +53,9 @@ export default {
   methods: {
     connectWallet() {
       this.$store.dispatch('connectWallet');
+    },
+    hideLoader() {
+      this.showLoader = false
     }
   }
 }
