@@ -6,7 +6,7 @@
         <h1>Welcome to Full Degen Coin</h1>
         <p class="tagline">The Ultimate Cryptocurrency for True Degens</p>
         <div class="cta-buttons">
-          <a href="#" class="primary-btn">Buy Now</a>
+          <a href="#" class="primary-btn" @click.prevent="connectWallet">{{ walletButtonText }}</a>
           <!--a href="#" class="secondary-btn">View Whitepaper</a> -->
         </div>
       </div>
@@ -52,16 +52,16 @@
           <p>Total Supply</p>
         </div>
         <div class="tokenomics-card">
-          <h3>5%</h3>
-          <p>Reflection to Holders</p>
+          <h3>42.5%</h3>
+          <p>Treasury Management</p>
         </div>
         <div class="tokenomics-card">
-          <h3>3%</h3>
-          <p>Liquidity Pool</p>
+          <h3>2.5%</h3>
+          <p>Community Rewards</p>
         </div>
         <div class="tokenomics-card">
-          <h3>2%</h3>
-          <p>Marketing & Development</p>
+          <h3>20%</h3>
+          <p>Partnerships</p>
         </div>
       </div>
       <router-link to="/tokenomics" class="learn-more">Learn More About Tokenomics</router-link>
@@ -87,7 +87,7 @@
           <p>Swap your SOL for Full Degen Coin</p>
         </div>
       </div>
-      <a href="#" class="primary-btn">Buy Now</a>
+      <a href="#" class="primary-btn" @click.prevent="connectWallet">{{ walletButtonText }}</a>
     </section>
 
     <!-- Community Section -->
@@ -204,12 +204,22 @@ export default {
         up: false
       },
       touchStartX: 0,
-      touchStartY: 0
+      touchStartY: 0,
+      walletButtonText: 'Connect Wallet',
+      provider: null,
+      wallet: null,
     }
   },
   mounted() {
     // Load high score when component is mounted
     this.loadHighScore();
+    
+    // Check if wallet was previously connected
+    if (localStorage.getItem('walletConnected') === 'true') {
+      this.$nextTick(() => {
+      this.connectWallet();
+      });
+    }
   },
   methods: {
     loadHighScore() {
@@ -589,7 +599,73 @@ export default {
       }
       
       this.gameLoop = requestAnimationFrame(this.updateGame);
-    }
+    },
+    async connectWallet() {
+      try {
+        // First check if wallet is already connected
+        if (this.provider && this.wallet) {
+          // Try to disconnect first
+          try {
+            await this.provider.disconnect();
+          } catch (err) {
+            console.log('Disconnect error:', err);
+          }
+          this.provider = null;
+          this.wallet = null;
+          this.walletButtonText = 'Connect Wallet';
+          localStorage.removeItem('walletConnected');
+          return;
+        }
+
+        // Check if Phantom is installed
+        if (!('phantom' in window)) {
+          alert('Phantom wallet is not installed! Please install it from phantom.app');
+          window.open('https://phantom.app/', '_blank');
+          return;
+        }
+
+        // Get provider
+        const provider = window.phantom?.solana;
+
+        if (!provider?.isPhantom) {
+          alert('Phantom wallet is not installed! Please install it from phantom.app');
+          window.open('https://phantom.app/', '_blank');
+          return;
+        }
+
+        try {
+          // Request connection to wallet with explicit network
+          const resp = await provider.connect({
+            onlyIfTrusted: false // This will always prompt the user
+          });
+
+          // Store connection info
+          this.provider = provider;
+          this.wallet = resp.publicKey.toString();
+          this.walletButtonText = this.wallet.slice(0, 4) + '...' + this.wallet.slice(-4);
+          localStorage.setItem('walletConnected', 'true');
+
+        } catch (err) {
+          if (err.code === 4001) {
+            // User rejected the connection
+            console.log('User rejected the connection');
+          } else if (err.code === -32002) {
+            // Connection request already pending
+            alert('Connection request already pending. Please check your Phantom wallet.');
+          } else {
+            console.error('Connection error:', err);
+            alert('Failed to connect to wallet. Please try again.');
+          }
+          this.walletButtonText = 'Connect Wallet';
+          localStorage.removeItem('walletConnected');
+        }
+
+      } catch (error) {
+        console.error('Wallet setup error:', error);
+        this.walletButtonText = 'Connect Wallet';
+        localStorage.removeItem('walletConnected');
+      }
+    },
   },
   watch: {
     showFbgmModal(newVal) {

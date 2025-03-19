@@ -10,7 +10,7 @@
         <router-link to="/about">About</router-link>
         <router-link to="/tokenomics">Tokenomics</router-link>
         <!-- <router-link to="/roadmap">Roadmap</router-link> -->
-        <a href="#" class="buy-button">Buy Now</a>
+        <a href="#" class="buy-button" @click.prevent="connectWallet">{{ walletButtonText }}</a>
       </nav>
     </header>
     <main>
@@ -26,6 +26,95 @@
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      walletButtonText: 'Connect Wallet',
+      provider: null,
+      wallet: null,
+    }
+  },
+  mounted() {
+    // Check if wallet was previously connected
+    if (localStorage.getItem('walletConnected') === 'true') {
+      setTimeout(() => {
+        this.connectWallet();
+      }, 500);
+    }
+  },
+  methods: {
+    async connectWallet() {
+      try {
+        // First check if wallet is already connected
+        if (this.provider && this.wallet) {
+          // Try to disconnect first
+          try {
+            await this.provider.disconnect();
+          } catch (err) {
+            console.log('Disconnect error:', err);
+          }
+          this.provider = null;
+          this.wallet = null;
+          this.walletButtonText = 'Connect Wallet';
+          localStorage.removeItem('walletConnected');
+          return;
+        }
+
+        // Check if Phantom is installed
+        if (!('phantom' in window)) {
+          alert('Phantom wallet is not installed! Please install it from phantom.app');
+          window.open('https://phantom.app/', '_blank');
+          return;
+        }
+
+        // Get provider
+        const provider = window.phantom?.solana;
+
+        if (!provider?.isPhantom) {
+          alert('Phantom wallet is not installed! Please install it from phantom.app');
+          window.open('https://phantom.app/', '_blank');
+          return;
+        }
+
+        try {
+          // Request connection to wallet with explicit network
+          const resp = await provider.connect({
+            onlyIfTrusted: false // This will always prompt the user
+          });
+
+          // Store connection info
+          this.provider = provider;
+          this.wallet = resp.publicKey.toString();
+          this.walletButtonText = this.wallet.slice(0, 4) + '...' + this.wallet.slice(-4);
+          localStorage.setItem('walletConnected', 'true');
+
+        } catch (err) {
+          if (err.code === 4001) {
+            // User rejected the connection
+            console.log('User rejected the connection');
+          } else if (err.code === -32002) {
+            // Connection request already pending
+            alert('Connection request already pending. Please check your Phantom wallet.');
+          } else {
+            console.error('Connection error:', err);
+            alert('Failed to connect to wallet. Please try again.');
+          }
+          this.walletButtonText = 'Connect Wallet';
+          localStorage.removeItem('walletConnected');
+        }
+
+      } catch (error) {
+        console.error('Wallet setup error:', error);
+        this.walletButtonText = 'Connect Wallet';
+        localStorage.removeItem('walletConnected');
+      }
+    }
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
