@@ -9,7 +9,7 @@
       <h2>Token Distribution</h2>
       <div class="distribution-container">
         <div class="distribution-chart">
-          <canvas ref="tokenChart" width="400" height="400"></canvas>
+          <canvas ref="tokenChart" width="500" height="500"></canvas>
         </div>
         <div class="distribution-details">
           <div class="distribution-item">
