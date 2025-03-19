@@ -555,12 +555,12 @@ export default {
         dollar.y += dollar.vy;
 
         if (this.checkCollision(dollar)) {
-          this.score++;
+          this.score += 2;
           this.dollars.splice(i, 1);
           continue;
         }
 
-        if (dollar.y < -30 || dollar.x < -30 || dollar.x > 830) {
+        if (dollar.y < 25 || dollar.x < 25 || dollar.x > 785) {
           this.dollars.splice(i, 1);
         }
       }
@@ -572,12 +572,12 @@ export default {
         lady.y += lady.vy;
 
         if (this.checkCollision(lady)) {
-          this.score += 2;
+          this.score += 1;
           this.ladies.splice(i, 1);
           continue;
         }
 
-        if (lady.y < -30 || lady.x < -30 || lady.x > 830) {
+        if (lady.y < 25 || lady.x < 25 || lady.x > 785) {
           this.ladies.splice(i, 1);
         }
       }
@@ -593,7 +593,7 @@ export default {
           return;
         }
 
-        if (skull.y < -30 || skull.x < -30 || skull.x > 830) {
+        if (skull.y < 0 || skull.x < 0 || skull.x > 800) {
           this.skulls.splice(i, 1);
         }
       }
