@@ -13,11 +13,7 @@ export default createStore({
     setWallet(state, wallet) {
       state.wallet = wallet;
       // Update button text based on wallet state
-      if (wallet) {
-        state.walletButtonText = 'Disconnect Wallet';
-      } else {
-        state.walletButtonText = 'Connect Wallet';
-      }
+      state.walletButtonText = wallet ? 'Disconnect Wallet' : 'Connect Wallet';
     },
     setProvider(state, provider) {
       state.provider = provider;
@@ -26,9 +22,8 @@ export default createStore({
   actions: {
     async connectWallet({ commit, state }) {
       try {
-        // First check if wallet is already connected
+        // If already connected, disconnect first
         if (state.provider && state.wallet) {
-          // Try to disconnect
           try {
             await state.provider.disconnect();
           } catch (err) {
@@ -40,45 +35,44 @@ export default createStore({
           return;
         }
 
-        // Check if on mobile
+        // Determine if the user is on mobile
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        // Handle mobile deep linking
+        // Handle mobile deep linking using Phantom's URL scheme
         if (isMobile) {
-          // Use Phantom's connect URL format
           const dappUrl = encodeURIComponent(window.location.href);
           const phantomConnectUrl = `https://phantom.app/ul/v1/connect?app_url=${dappUrl}&redirect_url=${dappUrl}`;
           window.location.href = phantomConnectUrl;
           return;
         }
 
-        // Desktop flow continues as normal
+        // For desktop, verify that Phantom is installed
         if (!window.phantom?.solana) {
           window.open('https://phantom.app/', '_blank');
           alert('Please install Phantom wallet from phantom.app');
           return;
         }
 
-        // Get provider
-        const provider = window.phantom?.solana;
+        const provider = window.phantom.solana;
 
-        if (!provider?.isPhantom) {
+        // Check if the provider is indeed Phantom
+        if (!provider.isPhantom) {
           window.open('https://phantom.app/', '_blank');
           alert('Please install Phantom wallet from phantom.app');
           return;
         }
 
         try {
-          // Connect to wallet
+          // Trigger the connection prompt
           const resp = await provider.connect();
           const publicKey = resp.publicKey.toString();
 
-          // Store connection info
+          // Save the provider and wallet details
           commit('setProvider', provider);
           commit('setWallet', publicKey);
           localStorage.setItem('walletConnected', 'true');
-
         } catch (err) {
+          // Handle known error codes
           if (err.code === 4001) {
             console.log('User rejected the connection');
           } else if (err.code === -32002) {
@@ -90,7 +84,6 @@ export default createStore({
           commit('setWallet', null);
           localStorage.removeItem('walletConnected');
         }
-
       } catch (error) {
         console.error('Wallet setup error:', error);
         commit('setWallet', null);
@@ -98,6 +91,5 @@ export default createStore({
       }
     }
   },
-  modules: {
-  }
-})
+  modules: {}
+});
