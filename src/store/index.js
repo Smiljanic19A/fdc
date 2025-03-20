@@ -40,7 +40,18 @@ export default createStore({
           return;
         }
 
-        // Check if Phantom is installed
+        // Check if on mobile
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        // Handle mobile deep linking
+        if (isMobile) {
+          // Check if Phantom is installed by trying to open it
+          const phantomLink = 'https://phantom.app/ul/browse/';
+          window.location.href = `${phantomLink}${window.location.href}`;
+          return;
+        }
+
+        // Desktop flow continues as normal
         if (!window.phantom?.solana) {
           window.open('https://phantom.app/', '_blank');
           alert('Please install Phantom wallet from phantom.app');
