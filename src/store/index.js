@@ -45,9 +45,10 @@ export default createStore({
 
         // Handle mobile deep linking
         if (isMobile) {
-          // Check if Phantom is installed by trying to open it
-          const phantomLink = 'https://phantom.app/ul/browse/';
-          window.location.href = `${phantomLink}${window.location.href}`;
+          // Use Phantom's connect URL format
+          const dappUrl = encodeURIComponent(window.location.href);
+          const phantomConnectUrl = `https://phantom.app/ul/v1/connect?app_url=${dappUrl}&redirect_url=${dappUrl}`;
+          window.location.href = phantomConnectUrl;
           return;
         }
 
