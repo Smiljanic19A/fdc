@@ -6,10 +6,16 @@
         <img src="/logo.png" alt="Full Degen Coin Logo" class="logo">
         <h1>Full Degen Coin</h1>
       </div>
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/tokenomics">Tokenomics</router-link>
+      <div class="menu-toggle" @click="toggleNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-overlay" :class="{ active: isNavOpen }" @click="closeNav"></div>
+      <nav :class="{ active: isNavOpen }">
+        <router-link to="/" @click="closeNav">Home</router-link>
+        <router-link to="/about" @click="closeNav">About</router-link>
+        <router-link to="/tokenomics" @click="closeNav">Tokenomics</router-link>
         <!-- <router-link to="/roadmap">Roadmap</router-link> -->
         <a href="#" class="buy-button" @click.prevent="connectWallet">{{ walletButtonText }}</a>
       </nav>
@@ -37,7 +43,8 @@ export default {
   },
   data() {
     return {
-      showLoader: true
+      showLoader: true,
+      isNavOpen: false
     }
   },
   computed: {
@@ -56,6 +63,14 @@ export default {
     },
     hideLoader() {
       this.showLoader = false
+    },
+    toggleNav() {
+      this.isNavOpen = !this.isNavOpen;
+      document.body.style.overflow = this.isNavOpen ? 'hidden' : '';
+    },
+    closeNav() {
+      this.isNavOpen = false;
+      document.body.style.overflow = '';
     }
   }
 }
@@ -180,20 +195,73 @@ footer {
   color: #f0c225; /* Updated from #f7931a to gold/yellow */
 }
 
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  transition: all 0.3s;
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 98;
+}
+
+.nav-overlay.active {
+  display: block;
+}
+
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
+    flex-direction: row;
     padding: 1rem;
+    position: relative;
   }
   
-  .logo-container {
-    margin-bottom: 1rem;
+  .menu-toggle {
+    display: flex;
   }
   
   nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    flex-direction: column;
+    padding: 80px 2rem 2rem;
+    transition: right 0.3s ease;
+    z-index: 99;
+  }
+  
+  nav.active {
+    right: 0;
+  }
+  
+  nav a {
+    margin: 1rem 0;
+  }
+  
+  .logo-container {
+    margin-bottom: 0;
   }
 }
 </style>
